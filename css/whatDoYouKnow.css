@@ -1,4 +1,6 @@
-/* What Do You Know Game Styles */
+/*
+ * What Do You Know - Pixel Funky Style
+ */
 
 .wdyk-container {
     display: flex;
@@ -8,36 +10,66 @@
     min-height: 100vh;
     padding: 20px;
     padding-top: 100px;
-}
-
-.game-title {
-    color: #FFA300;
-    font-size: 48px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    gap: 30px;
 }
 
 .question-section {
+    text-align: center;
     width: 100%;
     max-width: 900px;
-    margin-bottom: 40px;
+}
+
+.game-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 24px;
+    color: #00FFFF;
+    text-shadow: 
+        4px 4px 0 #FF6B00,
+        0 0 30px rgba(0, 255, 255, 0.5);
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    animation: title-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes title-glow {
+    from { text-shadow: 4px 4px 0 #FF6B00, 0 0 30px rgba(0, 255, 255, 0.5); }
+    to { text-shadow: 4px 4px 0 #FF6B00, 0 0 60px rgba(0, 255, 255, 0.8); }
 }
 
 .question-box {
-    background-color: #2c2c2c;
-    border: 5px solid #FFA300;
-    border-radius: 20px;
-    padding: 30px;
-    text-align: center;
+    background: linear-gradient(135deg, #1a1a3a 0%, #0a0a1a 100%);
+    border: 4px solid #FF6B00;
+    padding: 30px 40px;
+    box-shadow: 
+        6px 6px 0 rgba(255, 107, 0, 0.5),
+        0 0 50px rgba(255, 107, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.question-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 107, 0, 0.1), transparent);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0% { left: -100%; }
+    50%, 100% { left: 100%; }
 }
 
 .question-box p {
+    font-family: 'VT323', monospace;
+    font-size: 36px;
     color: white;
-    font-size: 32px;
     margin: 0;
-    font-weight: bold;
+    text-shadow: 2px 2px 0 #FF6B00;
 }
 
 /* Teams Section */
@@ -46,154 +78,139 @@
     align-items: center;
     justify-content: center;
     gap: 40px;
+    flex-wrap: wrap;
     width: 100%;
     max-width: 1000px;
 }
 
 .team-card {
-    background-color: #2c2c2c;
-    border: 4px solid #FFA300;
-    border-radius: 20px;
-    padding: 30px 50px;
+    background: linear-gradient(180deg, #2a2a4a 0%, #1a1a2a 100%);
+    border: 4px solid;
+    padding: 30px 40px;
+    min-width: 280px;
     text-align: center;
-    min-width: 300px;
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease;
-}
-
-.team-card h3 {
-    color: #FFA300;
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 20px;
+    position: relative;
 }
 
 .team-a {
     border-color: #00BFFF;
-}
-
-.team-a h3 {
-    color: #00BFFF;
+    box-shadow: 
+        6px 6px 0 rgba(0, 191, 255, 0.5),
+        0 0 30px rgba(0, 191, 255, 0.2);
 }
 
 .team-b {
-    border-color: #FF6B6B;
+    border-color: #FF4444;
+    box-shadow: 
+        6px 6px 0 rgba(255, 68, 68, 0.5),
+        0 0 30px rgba(255, 68, 68, 0.2);
 }
 
-.team-b h3 {
-    color: #FF6B6B;
+.team-card h3 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 16px;
+    margin: 0 0 20px 0;
+    color: white;
+    text-transform: uppercase;
 }
+
+.team-a h3 { text-shadow: 0 0 20px #00BFFF; }
+.team-b h3 { text-shadow: 0 0 20px #FF4444; }
 
 /* Strikes */
 .strikes-container {
     display: flex;
     justify-content: center;
     gap: 15px;
-    margin: 20px 0;
+    margin-bottom: 15px;
 }
 
 .strike {
-    width: 60px;
-    height: 60px;
-    border: 3px solid #555;
-    border-radius: 50%;
-    background-color: #1a1a1a;
+    width: 50px;
+    height: 50px;
+    border: 4px solid #444;
+    background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
     transition: all 0.3s ease;
+    position: relative;
 }
 
 .strike.active {
-    background-color: #FF4444;
-    border-color: #FF4444;
-    box-shadow: 0 0 20px #FF4444;
+    border-color: #FF0040;
+    background: linear-gradient(180deg, #FF0040 0%, #aa0030 100%);
+    box-shadow: 
+        0 0 20px rgba(255, 0, 64, 0.8),
+        inset 0 0 10px rgba(255, 255, 255, 0.3);
+    animation: strike-pulse 0.5s ease-in-out;
+}
+
+.strike.active::after {
+    content: '✕';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 20px;
+    color: white;
+    text-shadow: 2px 2px 0 #aa0030;
+}
+
+@keyframes strike-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
 }
 
 .strike-text {
-    color: white;
+    font-family: 'VT323', monospace;
     font-size: 24px;
-    margin: 15px 0;
-}
-
-.strike-text span {
-    color: #FF4444;
-    font-weight: bold;
+    color: #888;
+    margin: 10px 0;
 }
 
 /* Team Status */
 .team-status {
-    font-size: 28px;
-    font-weight: bold;
-    min-height: 40px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    min-height: 30px;
     margin-top: 10px;
 }
 
 .team-status.winner {
     color: #00FF00;
-    animation: pulse 1s infinite;
+    text-shadow: 0 0 20px #00FF00;
+    animation: winner-flash 0.5s ease-in-out infinite alternate;
 }
 
 .team-status.loser {
-    color: #FF4444;
+    color: #FF0040;
+    text-shadow: 0 0 20px #FF0040;
 }
 
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+@keyframes winner-flash {
+    from { opacity: 1; }
+    to { opacity: 0.5; }
+}
+
+.team-card.lost {
+    opacity: 0.5;
+    filter: grayscale(50%);
+    transform: scale(0.95);
 }
 
 /* VS Section */
 .vs-section {
-    font-size: 48px;
-    font-weight: bold;
-    color: #FFA300;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 32px;
+    color: #FF6B00;
+    text-shadow: 
+        4px 4px 0 #FF00FF,
+        0 0 30px rgba(255, 107, 0, 0.5);
+    animation: vs-pulse 1s ease-in-out infinite;
 }
 
-/* Controls Info */
-.controls-info {
-    margin-top: 40px;
-    background-color: rgba(44, 44, 44, 0.8);
-    padding: 15px 30px;
-    border-radius: 10px;
-    border: 2px solid #FFA300;
+@keyframes vs-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
 }
-
-.controls-info p {
-    color: white;
-    font-size: 18px;
-    margin: 0;
-}
-
-.controls-info strong {
-    color: #FFA300;
-}
-
-/* Team card when lost */
-.team-card.lost {
-    opacity: 0.5;
-    border-color: #555;
-}
-
-.team-card.lost h3 {
-    color: #555;
-}
-
-/* Wrong answer overlay */
-#wrong-answer-image-container {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-}
-
-#wrong-answer-image {
-    width: 250px;
-    height: auto;
-    animation: shake 0.5s ease;
-}
-
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-20px); }
-    75% { transform: translateX(20px); }
-}
-

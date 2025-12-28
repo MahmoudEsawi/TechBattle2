@@ -1,5 +1,5 @@
 /*
- * Buzzer Game Styles
+ * Buzzer Game - Pixel Funky Style
  */
 
 .buzzer-container {
@@ -17,163 +17,250 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
 }
 
 .buzzer-logo {
-    max-width: 350px;
+    max-width: 320px;
     height: auto;
+    filter: drop-shadow(0 0 30px rgba(255, 107, 0, 0.6));
+    animation: logo-float 3s ease-in-out infinite;
+}
+
+@keyframes logo-float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-10px) rotate(-1deg); }
+    75% { transform: translateY(-5px) rotate(1deg); }
 }
 
 .round-title {
-    color: #FFA300;
-    font-size: 24px;
-    font-weight: bold;
+    font-family: 'Press Start 2P', cursive;
+    color: #00FFFF;
+    font-size: 18px;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     margin: 0;
+    text-shadow: 
+        3px 3px 0 #FF00FF,
+        0 0 30px rgba(0, 255, 255, 0.5);
+    animation: title-rainbow 5s linear infinite;
+}
+
+@keyframes title-rainbow {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
 }
 
 .question-display {
-    background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
-    border: 3px solid #FFA300;
-    border-radius: 20px;
-    padding: 30px 50px;
-    max-width: 900px;
+    background: linear-gradient(135deg, #1a1a3a 0%, #0a0a1a 100%);
+    border: 4px solid #FF6B00;
+    padding: 35px 50px;
+    max-width: 950px;
     width: 90%;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(255, 163, 0, 0.2);
+    box-shadow: 
+        6px 6px 0 rgba(255, 107, 0, 0.5),
+        0 0 60px rgba(255, 107, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.question-display::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg, transparent, rgba(255, 107, 0, 0.1), transparent 30%);
+    animation: rotate-bg 4s linear infinite;
+}
+
+@keyframes rotate-bg {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 .question-display p {
+    font-family: 'VT323', monospace;
     color: white;
-    font-size: 32px;
+    font-size: 34px;
     font-weight: bold;
     margin: 0;
     line-height: 1.4;
+    text-shadow: 2px 2px 0 #FF6B00;
+    position: relative;
+    z-index: 1;
 }
 
+/* Teams Display */
 .teams-display {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 30px;
-    margin: 20px 0;
+    gap: 40px;
+    margin: 25px 0;
 }
 
 .team-box {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    padding: 25px 40px;
-    border-radius: 15px;
-    min-width: 180px;
+    gap: 15px;
+    padding: 30px 50px;
+    min-width: 200px;
     transition: all 0.3s ease;
+    border: 4px solid;
+    background: linear-gradient(180deg, #2a2a4a 0%, #1a1a2a 100%);
+    box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.5);
 }
 
 .team-left {
-    background: linear-gradient(135deg, #1e3a5f 0%, #0d1b2a 100%);
-    border: 3px solid #3498db;
+    border-color: #00BFFF;
+    box-shadow: 
+        5px 5px 0 rgba(0, 191, 255, 0.5),
+        0 0 30px rgba(0, 191, 255, 0.2);
 }
 
 .team-right {
-    background: linear-gradient(135deg, #5f1e1e 0%, #2a0d0d 100%);
-    border: 3px solid #e74c3c;
+    border-color: #FF4444;
+    box-shadow: 
+        5px 5px 0 rgba(255, 68, 68, 0.5),
+        0 0 30px rgba(255, 68, 68, 0.2);
 }
 
 .team-box .team-name {
+    font-family: 'Press Start 2P', cursive;
     color: white;
-    font-size: 22px;
-    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
 }
 
+.team-left .team-name { text-shadow: 0 0 15px #00BFFF; }
+.team-right .team-name { text-shadow: 0 0 15px #FF4444; }
+
 .team-box .team-score {
-    color: #FFA300;
+    font-family: 'Press Start 2P', cursive;
+    color: #00FF00;
     font-size: 48px;
-    font-weight: bold;
+    text-shadow: 
+        0 0 20px #00FF00,
+        0 0 40px #00FF00;
 }
 
 .team-box.buzzed {
-    transform: scale(1.1);
-    box-shadow: 0 0 30px rgba(255, 163, 0, 0.6);
+    transform: scale(1.1) translateY(-5px);
+    animation: team-buzz 0.3s ease-in-out;
 }
 
 .team-left.buzzed {
-    border-color: #FFA300;
-    box-shadow: 0 0 30px rgba(52, 152, 219, 0.8);
+    box-shadow: 
+        0 0 50px rgba(0, 191, 255, 0.8),
+        0 0 100px rgba(0, 191, 255, 0.5);
 }
 
 .team-right.buzzed {
-    border-color: #FFA300;
-    box-shadow: 0 0 30px rgba(231, 76, 60, 0.8);
+    box-shadow: 
+        0 0 50px rgba(255, 68, 68, 0.8),
+        0 0 100px rgba(255, 68, 68, 0.5);
+}
+
+@keyframes team-buzz {
+    0%, 100% { transform: scale(1.1) translateY(-5px); }
+    50% { transform: scale(1.15) translateY(-10px); }
 }
 
 .vs-box {
-    color: #FFA300;
-    font-size: 36px;
-    font-weight: bold;
-    text-shadow: 0 0 10px rgba(255, 163, 0, 0.5);
+    font-family: 'Press Start 2P', cursive;
+    color: #FF6B00;
+    font-size: 28px;
+    text-shadow: 
+        3px 3px 0 #FF00FF,
+        0 0 30px rgba(255, 107, 0, 0.6);
+    animation: vs-bounce 1s ease-in-out infinite;
 }
 
+@keyframes vs-bounce {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.2) rotate(5deg); }
+}
+
+/* Buzzer Indicator */
 .buzzer-indicator {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
 }
 
 .buzzer-btn {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     background: radial-gradient(circle at 30% 30%, #ff4444, #cc0000);
-    border-radius: 50%;
-    border: 5px solid #990000;
+    border: 6px solid #990000;
     box-shadow: 
-        0 10px 20px rgba(0, 0, 0, 0.5),
-        inset 0 -5px 15px rgba(0, 0, 0, 0.3),
-        inset 0 5px 15px rgba(255, 255, 255, 0.2);
+        0 15px 30px rgba(0, 0, 0, 0.6),
+        inset 0 -8px 20px rgba(0, 0, 0, 0.4),
+        inset 0 8px 20px rgba(255, 255, 255, 0.2),
+        0 0 50px rgba(255, 0, 0, 0.3);
     transition: all 0.1s ease;
+    position: relative;
+}
+
+.buzzer-btn::after {
+    content: 'BUZZ!';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    color: white;
+    text-shadow: 2px 2px 0 #990000;
+    opacity: 0.8;
 }
 
 .buzzer-btn.pressed {
-    transform: scale(0.95);
+    transform: scale(0.9);
     box-shadow: 
-        0 5px 10px rgba(0, 0, 0, 0.5),
-        inset 0 -2px 10px rgba(0, 0, 0, 0.3);
+        0 5px 15px rgba(0, 0, 0, 0.6),
+        inset 0 -3px 15px rgba(0, 0, 0, 0.4);
 }
 
 .buzzer-text {
+    font-family: 'VT323', monospace;
     color: #888;
-    font-size: 14px;
+    font-size: 20px;
     margin: 0;
 }
 
+/* Controls Info */
 .controls-info {
     display: flex;
-    gap: 20px;
+    gap: 15px;
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 20px;
 }
 
 .controls-info span {
-    background: rgba(255, 163, 0, 0.2);
-    color: #FFA300;
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-size: 12px;
-    border: 1px solid #FFA300;
+    font-family: 'Press Start 2P', cursive;
+    background: linear-gradient(180deg, #2a2a4a 0%, #1a1a2a 100%);
+    color: #00FFFF;
+    padding: 10px 18px;
+    font-size: 8px;
+    border: 3px solid #00FFFF;
+    box-shadow: 3px 3px 0 rgba(0, 255, 255, 0.3);
+    text-transform: uppercase;
 }
 
-/* Animation for score update */
+/* Score Animation */
 @keyframes scorePopIn {
     0% { transform: scale(1); }
-    50% { transform: scale(1.3); }
+    50% { transform: scale(1.4); color: #FFFF00; }
     100% { transform: scale(1); }
 }
 
 .score-updated {
-    animation: scorePopIn 0.3s ease;
+    animation: scorePopIn 0.4s ease;
 }
-
