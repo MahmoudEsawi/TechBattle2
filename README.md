@@ -17,6 +17,15 @@
 
 ## 🌟 Features
 
+### 📊 Scoreboard System
+- **Auto-updating** real-time scoreboard
+- **Persistent Storage** - scores saved in browser localStorage
+- **Multi-game Integration** - tracks points from all games
+- **Team Statistics** - Wins, Games Played, Win Rate
+- **Top 3 Highlighting** - Special styling for podium teams
+- **Auto-refresh** - Updates every 2 seconds
+- **Reset Functionality** - Clear all scores with confirmation
+
 ### 🏆 Tournament Bracket System
 - **8-team knockout tournament** with Quarter Finals, Semi Finals, and Final
 - **Drag & Drop** team placement
@@ -24,6 +33,7 @@
 - **Mystery Teams** support (pre-assigned slots)
 - **Victory Celebration** with confetti and animations
 - **Persistent State** - saves progress in browser
+- **Score Integration** - Points automatically added to scoreboard
 
 ### 🎯 Games
 
@@ -60,6 +70,19 @@ Fast-paced buzzer game - first to buzz gets the point!
 | `P` | Previous Question |
 | `R` | Reset Scores |
 
+#### 📊 Scoreboard
+Real-time scoreboard tracking all teams and their points!
+
+| Key | Action |
+|-----|--------|
+| `R` (Ctrl+R) | Reset All Scores |
+| `H` | Return to Home |
+
+**Score Tracking:**
+- **What Do You Know:** +1 point per win
+- **Buzzer:** +1 point per correct answer
+- **Tournament:** +1 (QF), +2 (SF), +3 (Final) per win
+
 ---
 
 ## 📁 Project Structure
@@ -74,20 +97,23 @@ Tech-Battle/
 │   ├── WhatDoYouKnow.html     # ❓ WDYK Game
 │   ├── timer.html             # ⏱️ Timer Game
 │   ├── buzzer.html            # 🔔 Buzzer Game
-│   └── tournament.html        # 🏆 Tournament Bracket
+│   ├── tournament.html        # 🏆 Tournament Bracket
+│   └── scoreboard.html        # 📊 Scoreboard
 │
 ├── 📂 css/                    # Stylesheets
 │   ├── style.css              # 🎨 Global Styles
 │   ├── tournament.css         # Tournament Styles
 │   ├── whatDoYouKnow.css      # WDYK Styles
 │   ├── buzzer.css             # Buzzer Styles
-│   └── gameSetup.css          # Setup Page Styles
+│   ├── gameSetup.css          # Setup Page Styles
+│   └── scoreboard.css         # Scoreboard Styles
 │
 ├── 📂 js/                     # JavaScript
 │   ├── script.js              # Timer Logic
 │   ├── tournament.js          # Tournament Logic
 │   ├── whatDoYouKnow.js       # WDYK Logic
-│   └── buzzer.js              # Buzzer Logic
+│   ├── buzzer.js              # Buzzer Logic
+│   └── scoreboard.js          # Scoreboard Logic
 │
 ├── 📂 questions/              # 📝 Question Files (Editable!)
 │   ├── match1-questions.js    # Quarter Final 1
@@ -199,7 +225,33 @@ const MATCH_QUESTIONS = {
            └── Select Round (QF / SF / Final)
                └── Select Match
                    └── ▶️ Start Game!
+                   
+3. 🏠 Home Page
+   └── 📊 Scoreboard (View all team scores)
 ```
+
+## 📊 Scoreboard System
+
+### How It Works
+The scoreboard automatically tracks points from all games:
+- **What Do You Know:** When a team wins (opponent gets 3 strikes), they receive **+1 point**
+- **Buzzer:** Each correct answer awards **+1 point** to the answering team
+- **Tournament:** Points are awarded based on round:
+  - Quarter Finals: **+1 point** per win
+  - Semi Finals: **+2 points** per win
+  - Final: **+3 points** per win
+
+### Features
+- ✅ **Real-time Updates** - Auto-refreshes every 2 seconds
+- ✅ **Persistent Storage** - Scores saved in browser localStorage
+- ✅ **Team Statistics** - Tracks total points, wins, games played, and win rate
+- ✅ **Visual Rankings** - Top 3 teams highlighted with special styling
+- ✅ **Reset Option** - Clear all scores with confirmation dialog
+
+### Accessing the Scoreboard
+1. Click **📊 Scoreboard** button on the home page
+2. Or navigate to `/pages/scoreboard.html`
+3. Scores update automatically as games are played
 
 ---
 
