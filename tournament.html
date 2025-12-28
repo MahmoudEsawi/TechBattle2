@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournament Bracket - Tech Battle</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./tournament.css">
+</head>
+<body>
+    <a href="./index.html"><img src="./assets/images/CS LOGO-04.png" title="CSLOGO" class="CS-logo"></a>
+    
+    <div class="tournament-container">
+        <h1 class="tournament-title">🏆 Tech Battle Tournament</h1>
+        
+        <!-- Controls -->
+        <div class="controls">
+            <a href="./index.html" class="control-btn home-btn">🏠</a>
+            <button id="drawBtn" class="control-btn draw-btn">🎲</button>
+            <button id="resetBtn" class="control-btn reset-btn">🔄</button>
+        </div>
+
+
+        <!-- Tournament Bracket - Two Sides -->
+        <div class="bracket-wrapper">
+            
+            <!-- LEFT SIDE -->
+            <div class="bracket-side left-side">
+                
+                <div class="bracket-flow">
+                    <!-- Quarter Finals Left -->
+                    <div class="round qf-round">
+                        <div class="match" id="match1">
+                            <div class="team team-top drop-zone" data-match="1" data-position="top" id="qf1-top">
+                                <span class="team-name">TBD</span>
+                            </div>
+                            <div class="vs">VS</div>
+                            <div class="team team-bottom drop-zone" data-match="1" data-position="bottom" id="qf1-bottom">
+                                <span class="team-name">TBD</span>
+                            </div>
+                        </div>
+
+                        <div class="match" id="match2">
+                            <div class="team team-top drop-zone" data-match="2" data-position="top" id="qf2-top">
+                                <span class="team-name">TBD</span>
+                            </div>
+                            <div class="vs">VS</div>
+                            <div class="team team-bottom locked" data-match="2" data-position="bottom" id="qf2-bottom">
+                                <span class="team-name">🔒 Mystery 1</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Connector -->
+                    <div class="connector-h"></div>
+
+                    <!-- Semi Final Left -->
+                    <div class="round sf-round">
+                        <div class="match sf-match" id="match5">
+                            <div class="team team-top" data-match="5" data-position="top" id="sf1-top">
+                                <span class="team-name">Winner M1</span>
+                            </div>
+                            <div class="vs">VS</div>
+                            <div class="team team-bottom" data-match="5" data-position="bottom" id="sf1-bottom">
+                                <span class="team-name">Winner M2</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CENTER - Final & Champion -->
+            <div class="bracket-center">
+                <!-- Final -->
+                <div class="final-section">
+                    <h3 class="round-title">🏆 FINAL</h3>
+                    <div class="match final-match" id="match7">
+                        <div class="team team-top" data-match="7" data-position="top" id="f-top">
+                            <span class="team-name">Winner A</span>
+                        </div>
+                        <div class="vs final-vs">VS</div>
+                        <div class="team team-bottom" data-match="7" data-position="bottom" id="f-bottom">
+                            <span class="team-name">Winner B</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Champion -->
+                <div class="champion-section">
+                    <div class="champion-box" id="champion">
+                        <span class="champion-label">🥇 CHAMPION</span>
+                        <span class="champion-name">?</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT SIDE (Mirrored) -->
+            <div class="bracket-side right-side">
+                
+                <div class="bracket-flow">
+                    <!-- Quarter Finals Right -->
+                    <div class="round qf-round">
+                        <div class="match" id="match3">
+                            <div class="team team-top drop-zone" data-match="3" data-position="top" id="qf3-top">
+                                <span class="team-name">TBD</span>
+                            </div>
+                            <div class="vs">VS</div>
+                            <div class="team team-bottom drop-zone" data-match="3" data-position="bottom" id="qf3-bottom">
+                                <span class="team-name">TBD</span>
+                            </div>
+                        </div>
+
+                        <div class="match" id="match4">
+                            <div class="team team-top drop-zone" data-match="4" data-position="top" id="qf4-top">
+                                <span class="team-name">TBD</span>
+                            </div>
+                            <div class="vs">VS</div>
+                            <div class="team team-bottom locked" data-match="4" data-position="bottom" id="qf4-bottom">
+                                <span class="team-name">🔒 Mystery 2</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Connector -->
+                    <div class="connector-h"></div>
+
+                    <!-- Semi Final Right -->
+                    <div class="round sf-round">
+                        <div class="match sf-match" id="match6">
+                            <div class="team team-top" data-match="6" data-position="top" id="sf2-top">
+                                <span class="team-name">Winner M3</span>
+                            </div>
+                            <div class="vs">VS</div>
+                            <div class="team team-bottom" data-match="6" data-position="bottom" id="sf2-bottom">
+                                <span class="team-name">Winner M4</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Teams List -->
+        <div class="teams-list">
+            <div class="teams-grid">
+                <div class="team-badge" data-team="AI" draggable="true">AI</div>
+                <div class="team-badge" data-team="CIS" draggable="true">CIS</div>
+                <div class="team-badge" data-team="CSD" draggable="true">CSD</div>
+                <div class="team-badge" data-team="CS" draggable="true">CS</div>
+                <div class="team-badge" data-team="ISE" draggable="true">ISE</div>
+                <div class="team-badge" data-team="CE" draggable="true">CE</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Victory Celebration Overlay -->
+    <div id="victoryOverlay" class="victory-overlay hidden">
+        <div class="confetti-container" id="confetti"></div>
+        <div class="victory-content">
+            <div class="trophy-icon">🏆</div>
+            <div class="victory-title">THE WINNER IS</div>
+            <div class="winner-name" id="winnerName"></div>
+            <button class="close-celebration" onclick="closeCelebration()">✕</button>
+        </div>
+    </div>
+
+    <audio id="victorySound" preload="auto">
+        <source src="./assets/sounds/correct_answer.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="./tournament.js"></script>
+</body>
+</html>
+

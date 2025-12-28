@@ -1,91 +1,117 @@
+* {
+    box-sizing: border-box;
+}
 html,body{
-    margin: 0%;
-    padding: 0%;
+    margin: 0;
+    padding: 0;
     height: 100%;
     width: 100%;
-    background-image: url("./assets/images/backgroundPattern.png");
+    background-color: #1a1a2e;
+    background-image: url("/assets/images/backgroundPattern.png");
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    overflow-x: hidden;
 }
 .container{
-    display: grid;
-    grid-template-rows: 3fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr;
-    height: 100vh;
-    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+    padding: 20px;
+    padding-top: 100px;
 }
 .CS-img{
-    grid-row-start: 1;
-    grid-column-start: 2;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 30px;
 }
 .Buttons{
-    grid-area: 2/2;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px;
-    margin-bottom: 20px;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 .Buttons>a{
-    margin-bottom: 50px;
+    text-decoration: none;
 }
-.Buttons > a >button {
-    width: 130px;
+.Buttons > a > button {
+    width: 160px;
     height: 60px;
     color: white;
-    border-color: #FFA300;
-    border-radius:30px;
+    border: 2px solid #FFA300;
+    border-radius: 30px;
     font-weight: bold;
+    font-size: 16px;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.Buttons > a > button:hover {
+    background-color: #FFA300;
+    color: #1a1a1a;
+    transform: scale(1.05);
 }
 .CS-img >img{
     width: 500px;
     margin-top: 25px;
 }
 .CS-logo{
-    width: 220px;
-    height: 80px;
-    position: absolute;
-    margin: 15px;
-    margin-top: 15px;
+    width: 180px;
+    height: auto;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+.CS-logo:hover{
+    transform: scale(1.05);
 }
 .question{
     display: flex;
     justify-content: center;
     align-items: center;
-    grid-area: 1/2;
+    max-width: 800px;
+    margin-bottom: 20px;
 }
 
 .question > p{
-    font-size: 30px;
+    font-size: 28px;
     font-family: "Gill Sans", sans-serif;
     color: white;
     text-align: center;
-    width: 750px;
     font-weight: bold;
+    margin: 0;
 }
 .Game-container{
-    display: grid;
-    grid-template-rows: 0.5fr 2fr 0.2fr;
-    grid-template-columns: 0.5fr 2fr 0.5fr;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    height: 100vh;
-    width: 100vw;
-    gap: 5px;
+    min-height: 100vh;
+    width: 100%;
+    padding: 20px;
+    padding-top: 100px;
+    gap: 20px;
 }
 .inner-div {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr ;
-    grid-area: 2/2;
-    border: 10px solid #FFA300;
+    grid-template-rows: 1fr 1fr 1fr;
+    border: 8px solid #FFA300;
     border-radius: 20px;
     align-items: center;
     background-color: #2c2c2c;
-    perspective: 1000px; 
+    perspective: 1000px;
+    width: 100%;
+    max-width: 800px;
+    min-height: 400px;
 }
 
 .hide-answer {
@@ -93,7 +119,7 @@ html,body{
     height: 50px;
     border: none;
     border-radius: 15px;  
-    background-image: url("./assets/images/answerDiv.png");
+    background-image: url("/assets/images/answerDiv.png");
     background-repeat: no-repeat;
     background-size: cover;
     position: relative; 
@@ -144,26 +170,23 @@ html,body{
 }
 
 .container_timer{
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 100vw;
     height: 100vh;
-    grid-template-rows: 0.5fr 1fr 0.2fr;
-    grid-template-columns: 0.5fr 1fr 0.5fr;
+    gap: 30px;
+    padding-top: 80px;
 }
 .timer{
-    grid-column-start: 2;
-    grid-column-end: 2;
-    grid-row-start: 2;
     border: 5px solid #FFA300;
     width: 250px;
     height: 250px;
-    align-self: center;
-    justify-self: center;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #2c2c2c;
-    margin-bottom: 100px;
     border-radius: 40px;
 }
 .timer >p{
@@ -174,28 +197,32 @@ html,body{
 .timer_stop{
     background-color: red;
 }
+.questionTimer{
+    max-width: 800px;
+    text-align: center;
+}
 .questionTimer>p{
     font-size: 50px;
     font-family: "Gill Sans", sans-serif;
     color: white;
     text-align: center;
-    margin-top: 100px;
-    width: 700PX;
+    margin: 0;
 }
 .buzzerLogo{
-    margin-top: 160px;
-    grid-column-start: 2;
-    grid-row-start: 1;
+    margin-top: 20px;
+}
+.buzzerLogo img {
+    max-width: 400px;
 }
 .questionBuzzer{
-    grid-column-start: 2;
-    grid-row-start: 1;
+    max-width: 800px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 .questionBuzzer>p{
-    font-size: 40px;
+    font-size: 36px;
     font-family: "Gill Sans", sans-serif;
     color: white;
     text-align: center;
-    margin-top: 70px;
-    width: 780PX;
+    margin: 0;
 }

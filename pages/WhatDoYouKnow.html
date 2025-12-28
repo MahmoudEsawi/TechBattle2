@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>What Do You Know - Tech Battle</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/whatDoYouKnow.css">
+</head>
+<body>
+    <a href="../index.html"><img src="../assets/images/CS LOGO-04.png" title="CSLOGO" class="CS-logo"></a>
+    
+    <div class="wdyk-container">
+        <!-- Question Section -->
+        <div class="question-section">
+            <h2 class="game-title">What Do You Know?</h2>
+            <div class="question-box">
+                <p id="wdyk-question">Press N for next question</p>
+            </div>
+        </div>
+
+        <!-- Teams Section -->
+        <div class="teams-section">
+            <!-- Team A -->
+            <div class="team-card team-a">
+                <h3 id="teamAName">Team A</h3>
+                <div class="strikes-container">
+                    <div class="strike" id="strikeA1"></div>
+                    <div class="strike" id="strikeA2"></div>
+                    <div class="strike" id="strikeA3"></div>
+                </div>
+                <p class="strike-text">Strikes: <span id="strikesA">0</span>/3</p>
+                <div class="team-status" id="statusA"></div>
+            </div>
+
+            <!-- VS -->
+            <div class="vs-section">
+                <span>VS</span>
+            </div>
+
+            <!-- Team B -->
+            <div class="team-card team-b">
+                <h3 id="teamBName">Team B</h3>
+                <div class="strikes-container">
+                    <div class="strike" id="strikeB1"></div>
+                    <div class="strike" id="strikeB2"></div>
+                    <div class="strike" id="strikeB3"></div>
+                </div>
+                <p class="strike-text">Strikes: <span id="strikesB">0</span>/3</p>
+                <div class="team-status" id="statusB"></div>
+            </div>
+        </div>
+
+        </div>
+
+    <!-- Wrong Answer Image (hidden by default) -->
+    <div id="wrong-answer-image-container" style="display: none;">
+        <img id="wrong-answer-image" src="../assets/images/X_mark.png" alt="Wrong Answer">
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="../questions/whatdoyouknow-questions.js"></script>
+    <script>
+        // Load team names from localStorage
+        const teamA = localStorage.getItem('currentTeamA') || 'Team A';
+        const teamB = localStorage.getItem('currentTeamB') || 'Team B';
+        document.getElementById('teamAName').textContent = teamA;
+        document.getElementById('teamBName').textContent = teamB;
+        
+        // Load match-specific questions
+        const currentMatch = localStorage.getItem('currentMatch') || '1';
+        const script = document.createElement('script');
+        script.src = `../questions/match${currentMatch}-questions.js`;
+        script.onload = function() {
+            const gameScript = document.createElement('script');
+            gameScript.src = '../js/whatDoYouKnow.js';
+            document.body.appendChild(gameScript);
+        };
+        script.onerror = function() {
+            const gameScript = document.createElement('script');
+            gameScript.src = '../js/whatDoYouKnow.js';
+            document.body.appendChild(gameScript);
+        };
+        document.body.appendChild(script);
+    </script>
+</body>
+</html>
+

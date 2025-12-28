@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Setup - Tech Battle</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/gameSetup.css">
+</head>
+<body>
+    <a href="../index.html"><img src="../assets/images/CS LOGO-04.png" title="CSLOGO" class="CS-logo"></a>
+    
+    <div class="setup-container">
+        <a href="../index.html" class="home-btn-top">🏠</a>
+        <h1 class="setup-title">🎮 Game Setup</h1>
+        
+        <!-- Step 1: Choose Game -->
+        <div class="setup-step">
+            <h2 class="step-title">1. Choose Game</h2>
+            <div class="game-options">
+                <button class="game-option" data-game="wdyk" onclick="selectGame('wdyk')">
+                    <span class="game-icon">❓</span>
+                    <span class="game-name">What Do You Know</span>
+                </button>
+                <button class="game-option" data-game="timer" onclick="selectGame('timer')">
+                    <span class="game-icon">⏱️</span>
+                    <span class="game-name">Timer</span>
+                </button>
+                <button class="game-option" data-game="buzzer" onclick="selectGame('buzzer')">
+                    <span class="game-icon">🔔</span>
+                    <span class="game-name">Buzzer</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 2: Choose Round -->
+        <div class="setup-step" id="roundStep" style="display: none;">
+            <h2 class="step-title">2. Choose Round</h2>
+            <div class="round-options">
+                <button class="round-option" data-round="qf" onclick="selectRound('qf')">
+                    <span class="round-name">Quarter Finals</span>
+                    <span class="round-matches">4 matches</span>
+                </button>
+                <button class="round-option" data-round="sf" onclick="selectRound('sf')">
+                    <span class="round-name">Semi Finals</span>
+                    <span class="round-matches">2 matches</span>
+                </button>
+                <button class="round-option final-round" data-round="final" onclick="selectRound('final')">
+                    <span class="round-name">🏆 Final</span>
+                    <span class="round-matches">1 match</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 3: Choose Match (Teams from Draw) -->
+        <div class="setup-step" id="matchStep" style="display: none;">
+            <h2 class="step-title">3. Choose Match</h2>
+            <div class="match-options" id="matchOptions">
+                <!-- Matches will be loaded dynamically -->
+            </div>
+            <p class="no-draw-warning" id="noDrawWarning" style="display: none;">
+                ⚠️ No draw found! Please go to <a href="./tournament.html">Tournament</a> and make a draw first.
+            </p>
+        </div>
+
+        <!-- Step 4: Start -->
+        <div class="setup-step" id="startStep" style="display: none;">
+            <div class="selection-summary">
+                <p>Game: <strong id="selectedGame"></strong></p>
+                <p>Match: <strong id="selectedMatch"></strong></p>
+            </div>
+            <button class="start-btn" onclick="startGame()">▶️ Start Game</button>
+        </div>
+    </div>
+
+    <script>
+        let currentGame = null;
+        let currentRound = null;
+        let currentMatch = null;
+        let tournament = null;
+
+        // Load tournament data from localStorage
+        function loadTournamentData() {
+            const saved = localStorage.getItem('tournamentState');
+            if (saved) {
+                try {
+                    tournament = JSON.parse(saved);
+                    return true;
+                } catch(e) {
+                    return false;
+                }
+            }
+            return false;
+        }
+
+        function selectGame(game) {
+            currentGame = game;
+            
+            // Update UI
+            document.querySelectorAll('.game-option').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            document.querySelector(`[data-game="${game}"]`).classList.add('selected');
+            
+            // Show round step
+            document.getElementById('roundStep').style.display = 'block';
+            
+            // Update summary
+            const gameNames = { wdyk: 'What Do You Know', timer: 'Timer', buzzer: 'Buzzer' };
+            document.getElementById('selectedGame').textContent = gameNames[game] || game;
+            
+            // Reset next steps
+            document.getElementById('matchStep').style.display = 'none';
+            document.getElementById('startStep').style.display = 'none';
+            currentRound = null;
+            currentMatch = null;
+            
+            // Clear round selection
+            document.querySelectorAll('.round-option').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+        }
+
+        function selectRound(round) {
+            currentRound = round;
+            
+            // Update UI
+            document.querySelectorAll('.round-option').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            document.querySelector(`[data-round="${round}"]`).classList.add('selected');
+            
+            // Load matches for this round
+            loadMatchesForRound(round);
+            
+            // Show match step
+            document.getElementById('matchStep').style.display = 'block';
+            
+            // Reset start step
+            document.getElementById('startStep').style.display = 'none';
+            currentMatch = null;
+        }
+
+        function loadMatchesForRound(round) {
+            const matchOptions = document.getElementById('matchOptions');
+            const noDrawWarning = document.getElementById('noDrawWarning');
+            
+            matchOptions.innerHTML = '';
+            
+            // Load tournament data
+            if (!loadTournamentData() || !tournament.matches) {
+                noDrawWarning.style.display = 'block';
+                return;
+            }
+            
+            noDrawWarning.style.display = 'none';
+            
+            let matches = [];
+            
+            if (round === 'qf') {
+                matches = [
+                    { id: 1, key: 'qf1', name: 'Quarter Final 1' },
+                    { id: 2, key: 'qf2', name: 'Quarter Final 2' },
+                    { id: 3, key: 'qf3', name: 'Quarter Final 3' },
+                    { id: 4, key: 'qf4', name: 'Quarter Final 4' }
+                ];
+            } else if (round === 'sf') {
+                matches = [
+                    { id: 5, key: 'sf1', name: 'Semi Final 1' },
+                    { id: 6, key: 'sf2', name: 'Semi Final 2' }
+                ];
+            } else if (round === 'final') {
+                matches = [
+                    { id: 7, key: 'final', name: '🏆 Final' }
+                ];
+            }
+            
+            matches.forEach(match => {
+                const matchData = tournament.matches[match.key];
+                const teamA = matchData?.top || 'TBD';
+                const teamB = matchData?.bottom || 'TBD';
+                
+                const btn = document.createElement('button');
+                btn.className = 'match-option-card';
+                btn.dataset.match = match.id;
+                btn.onclick = () => selectMatch(match.id, teamA, teamB, match.name);
+                
+                btn.innerHTML = `
+                    <div class="match-teams">
+                        <span class="team-name-display">${teamA}</span>
+                        <span class="vs-text">VS</span>
+                        <span class="team-name-display">${teamB}</span>
+                    </div>
+                    <div class="match-label">${match.name}</div>
+                `;
+                
+                matchOptions.appendChild(btn);
+            });
+        }
+
+        function selectMatch(matchId, teamA, teamB, matchName) {
+            currentMatch = matchId;
+            
+            // Update UI
+            document.querySelectorAll('.match-option-card').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            document.querySelector(`[data-match="${matchId}"]`).classList.add('selected');
+            
+            // Show start step
+            document.getElementById('startStep').style.display = 'block';
+            
+            // Update summary
+            document.getElementById('selectedMatch').textContent = `${teamA} vs ${teamB}`;
+            
+            // Save team names for the game
+            localStorage.setItem('currentTeamA', teamA);
+            localStorage.setItem('currentTeamB', teamB);
+            localStorage.setItem('currentMatchName', matchName);
+        }
+
+        function startGame() {
+            if (!currentGame || !currentMatch) return;
+            
+            // Save selection
+            localStorage.setItem('currentGame', currentGame);
+            localStorage.setItem('currentMatch', currentMatch);
+            
+            // Save buzzer round info
+            localStorage.setItem('currentBuzzerRound', currentRound);
+            // Get match number within round
+            let matchNum = '1';
+            if (currentRound === 'qf') {
+                matchNum = String(currentMatch);
+            } else if (currentRound === 'sf') {
+                matchNum = String(currentMatch - 4);
+            }
+            localStorage.setItem('currentBuzzerMatch', matchNum);
+            
+            // Navigate to game
+            if (currentGame === 'wdyk') {
+                window.location.href = './WhatDoYouKnow.html';
+            } else if (currentGame === 'timer') {
+                window.location.href = './timer.html';
+            } else if (currentGame === 'buzzer') {
+                window.location.href = './buzzer.html';
+            }
+        }
+        
+        // Initial load
+        loadTournamentData();
+    </script>
+</body>
+</html>

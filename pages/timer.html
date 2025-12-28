@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <a href="../index.html"><img src="../assets/images/CS LOGO-04.png" title="CSLOGO" class="CS-logo"></a>
+    <div class="container_timer">
+        <div class="questionTimer">
+            <p id="questionP"></p>
+        </div>
+        <div class="timer">
+            <p id="Seconds">30</p>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../questions/timer-questions.js"></script>
+    <script>
+        // Load match-specific questions
+        const currentMatch = localStorage.getItem('currentMatch') || '1';
+        const script = document.createElement('script');
+        script.src = `../questions/match${currentMatch}-questions.js`;
+        script.onload = function() {
+            const gameScript = document.createElement('script');
+            gameScript.src = '../js/script.js';
+            document.body.appendChild(gameScript);
+        };
+        script.onerror = function() {
+            const gameScript = document.createElement('script');
+            gameScript.src = '../js/script.js';
+            document.body.appendChild(gameScript);
+        };
+        document.body.appendChild(script);
+    </script>
+
+</body>
+</html>
