@@ -82,6 +82,29 @@
 
         correctSound.currentTime = 0;
         correctSound.play();
+        
+        // Record win in scoreboard
+        try {
+            const winningTeamName = document.getElementById(team === 'A' ? 'teamBName' : 'teamAName').textContent;
+            const losingTeamName = document.getElementById(team === 'A' ? 'teamAName' : 'teamBName').textContent;
+            
+            // Load scoreboard functions
+            if (typeof window.addPoints !== 'undefined') {
+                window.addPoints(winningTeamName, 1);
+            } else {
+                // Fallback: use localStorage directly
+                const scores = JSON.parse(localStorage.getItem('teamScores') || '{}');
+                if (!scores[winningTeamName]) scores[winningTeamName] = { total: 0, wins: 0, games: 0 };
+                scores[winningTeamName].total += 1;
+                scores[winningTeamName].wins += 1;
+                scores[winningTeamName].games += 1;
+                if (!scores[losingTeamName]) scores[losingTeamName] = { total: 0, wins: 0, games: 0 };
+                scores[losingTeamName].games += 1;
+                localStorage.setItem('teamScores', JSON.stringify(scores));
+            }
+        } catch(e) {
+            console.log('Scoreboard not available:', e);
+        }
     }
 
     // Reset the game

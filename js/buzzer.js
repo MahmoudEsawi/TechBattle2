@@ -98,6 +98,24 @@
             scoreEl.classList.remove('score-updated');
         }, 500);
         
+        // Record point in scoreboard
+        try {
+            const teamName = document.getElementById(team === 'A' ? 'teamAName' : 'teamBName').textContent;
+            if (typeof window.addPoints !== 'undefined') {
+                window.addPoints(teamName, 1);
+            } else {
+                // Fallback: use localStorage directly
+                const scores = JSON.parse(localStorage.getItem('teamScores') || '{}');
+                if (!scores[teamName]) scores[teamName] = { total: 0, wins: 0, games: 0 };
+                scores[teamName].total += 1;
+                scores[teamName].wins += 1;
+                scores[teamName].games += 1;
+                localStorage.setItem('teamScores', JSON.stringify(scores));
+            }
+        } catch(e) {
+            console.log('Scoreboard not available:', e);
+        }
+        
         updateDisplay();
     }
     

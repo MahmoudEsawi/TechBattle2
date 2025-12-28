@@ -379,6 +379,42 @@ function selectWinner(matchNum, position) {
     updateDisplay();
     saveState();
     
+    // Record points in scoreboard
+    try {
+        const winner = match.winner;
+        const loser = match.winner === match.top ? match.bottom : match.top;
+        
+        // Points based on round
+        let points = 1; // Quarter Final
+        if (matchKey.startsWith('sf')) points = 2; // Semi Final
+        if (matchKey === 'final') points = 3; // Final
+        
+        // Use scoreboard functions if available
+        if (typeof window.addPoints !== 'undefined') {
+            window.addPoints(winner, points);
+            if (typeof window.recordLoss !== 'undefined') {
+                window.recordLoss(loser);
+            }
+        } else {
+            // Fallback: use localStorage directly
+            const scores = JSON.parse(localStorage.getItem('teamScores') || '{}');
+            
+            // Winner
+            if (!scores[winner]) scores[winner] = { total: 0, wins: 0, games: 0 };
+            scores[winner].total += points;
+            scores[winner].wins += 1;
+            scores[winner].games += 1;
+            
+            // Loser
+            if (!scores[loser]) scores[loser] = { total: 0, wins: 0, games: 0 };
+            scores[loser].games += 1;
+            
+            localStorage.setItem('teamScores', JSON.stringify(scores));
+        }
+    } catch(e) {
+        console.log('Scoreboard not available:', e);
+    }
+    
     // If this is the final match, show celebration!
     if (matchKey === 'final' && match.winner) {
         setTimeout(() => {

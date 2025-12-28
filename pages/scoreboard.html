@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scoreboard - Tech Battle</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/scoreboard.css">
+</head>
+<body>
+    <a href="../index.html"><img src="../assets/images/CS LOGO-04.png" title="CSLOGO" class="CS-logo"></a>
+    
+    <div class="scoreboard-container">
+        <div class="scoreboard-header">
+            <h1 class="scoreboard-title">🏆 SCOREBOARD</h1>
+            <div style="display: flex; gap: 15px;">
+                <a href="../index.html" class="reset-scores-btn" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">🏠 Home</a>
+                <button class="reset-scores-btn" onclick="resetAllScores()">🔄 Reset All</button>
+            </div>
+        </div>
+
+        <div class="scoreboard-grid" id="scoreboardGrid">
+            <!-- Teams will be loaded dynamically -->
+        </div>
+
+        <div class="controls-info">
+            <span>R = Reset All Scores</span>
+            <span>H = Home</span>
+        </div>
+    </div>
+
+    <script src="../js/scoreboard.js"></script>
+</body>
+</html>
+
